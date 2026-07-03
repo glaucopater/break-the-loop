@@ -11,6 +11,7 @@ export {
 export {
   storeAsyncJobResult,
   getUndeliveredAsyncJobs,
+  claimAsyncJob,
   markAsyncJobDelivered,
   parseAsyncJobPayload,
   type AsyncJobRow,

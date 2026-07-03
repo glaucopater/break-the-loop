@@ -72,6 +72,14 @@ export function getUndeliveredAsyncJobs(): AsyncJobRow[] {
     .all() as AsyncJobRow[];
 }
 
+export function claimAsyncJob(jobId: string): boolean {
+  const database = openSystemDb();
+  const result = database
+    .prepare(`UPDATE async_job_results SET delivered = 1 WHERE job_id = ? AND delivered = 0`)
+    .run(jobId);
+  return result.changes > 0;
+}
+
 export function markAsyncJobDelivered(jobId: string): void {
   const database = openSystemDb();
   database.prepare(`UPDATE async_job_results SET delivered = 1 WHERE job_id = ?`).run(jobId);

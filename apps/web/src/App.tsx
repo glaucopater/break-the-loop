@@ -40,6 +40,7 @@ export function App() {
   const [lastAgentTurn, setLastAgentTurn] = useState<TokenUsage | null>(null);
   const [cumulative, setCumulative] = useState({ input: 0, output: 0, turns: 0 });
   const bottomRef = useRef<HTMLDivElement>(null);
+  const deliveredJobIds = useRef(new Set<string>());
 
   const apiBase = useMemo(() => "/api", []);
 
@@ -57,6 +58,9 @@ export function App() {
     source.onmessage = (event) => {
       const payload = JSON.parse(event.data) as AsyncResultEvent | { type: "CONNECTED" };
       if (payload.type === "ASYNC_RESULT") {
+        if (deliveredJobIds.current.has(payload.jobId)) return;
+        deliveredJobIds.current.add(payload.jobId);
+
         setMessages((prev) =>
           prev.map((m) =>
             m.kind === "async-pending" && m.jobId === payload.jobId ? { ...m, completed: true } : m,
