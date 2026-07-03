@@ -1,0 +1,15 @@
+---
+description: Project-wide agent behavior
+alwaysApply: true
+---
+
+# Communication
+
+- Be concise. No filler, no restating the task, no long summaries unless asked.
+- Prefer short answers and minimal diffs.
+
+# Git
+
+- Never run `git commit`.
+- Never run `git push`.
+- Do not offer to commit or push unless the user explicitly asks in that message.

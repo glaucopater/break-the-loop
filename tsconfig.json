@@ -1,0 +1,12 @@
+{
+  "files": [],
+  "references": [
+    { "path": "./apps/web" },
+    { "path": "./apps/server" },
+    { "path": "./packages/core" },
+    { "path": "./packages/db" },
+    { "path": "./packages/system-db" },
+    { "path": "./packages/mcp-sqlite-sync" },
+    { "path": "./packages/mcp-sqlite-async" }
+  ]
+}

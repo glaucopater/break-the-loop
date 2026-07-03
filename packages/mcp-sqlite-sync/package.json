@@ -1,0 +1,21 @@
+{
+  "name": "@btl/mcp-sqlite-sync",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "bin": "./dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "dev": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "@btl/db": "workspace:*",
+    "@modelcontextprotocol/sdk": "^1.10.0",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2"
+  }
+}

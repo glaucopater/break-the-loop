@@ -1,0 +1,28 @@
+{
+  "name": "break-the-loop",
+  "private": true,
+  "packageManager": "yarn@4.6.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "setup": "node scripts/setup-env.mjs",
+    "dev": "yarn setup && yarn seed && yarn build:deps && concurrently -n server,web -c blue,magenta --kill-others-on-fail \"yarn workspace @btl/server dev\" \"wait-on tcp:127.0.0.1:3001 && yarn workspace @btl/web dev\"",
+    "build": "yarn workspaces foreach -Apt run build",
+    "build:deps": "yarn workspaces foreach -Rpt --from @btl/server run build",
+    "seed": "yarn workspace @btl/db seed",
+    "tsc": "yarn workspaces foreach -Apt --exclude break-the-loop run typecheck",
+    "typecheck": "yarn workspaces foreach -Apt --exclude break-the-loop run typecheck",
+    "lint": "eslint .",
+    "check": "yarn typecheck && yarn lint"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.22.0",
+    "concurrently": "^9.1.2",
+    "eslint": "^9.22.0",
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^8.26.1",
+    "wait-on": "^9.0.10"
+  }
+}
